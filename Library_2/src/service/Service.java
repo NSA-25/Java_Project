@@ -17,6 +17,7 @@ public class Service
     private EmployeeRepository employeeRepository= new EmployeeRepository();
 
     private CSVService CSV = CSVService.getInstance();
+    private AuditService audit = AuditService.getInstance();
 
 //    private Map<String, Client> clients = new HashMap<>();
 //    private Map<String, Book> books= new HashMap<>();
@@ -166,6 +167,7 @@ public class Service
     }
     public void createClient()
     {
+        audit.write("createClient");
         Scanner s = new Scanner(System.in);
         System.out.println("Introduceti prenumele clientului");
         String first = s.nextLine();
@@ -191,14 +193,17 @@ public class Service
     }
     public void printClient(String id)
     {
+        audit.write("printClient");
         clientRepository.read(id);
     }
     public void printClients()
     {
+        audit.write("printClients");
         clientRepository.readAll();
     }
     public void deleteClient(String id)
     {
+        audit.write("deleteClient");
         clientRepository.delete(id);
     }
     public int exists (ArrayList<Author> authors, String last, String first)
@@ -216,6 +221,7 @@ public class Service
     }
     public void createBook()
     {
+        audit.write("createBook");
         Scanner s = new Scanner(System.in);
         System.out.println("1 Introduceti o carte noua.\n2 Adaugati un examplar al unei carti deja existente");
         String ans = s.nextLine();
@@ -282,18 +288,22 @@ public class Service
     }
     public void printBook(String id)
     {
+        audit.write("printBook");
         bookRepository.read(id);
     }
     public void printBooks()
     {
+        audit.write("printBooks");
         bookRepository.readAll();
     }
     public void deleteBook(String id)
     {
+        audit.write("deleteBook");
         bookRepository.delete(id);
     }
     public void createAuthor()
     {
+        audit.write("printBook");
         Scanner s = new Scanner(System.in);
         System.out.println("Prenumele autorului: ");
         String first = s.nextLine();
@@ -304,18 +314,22 @@ public class Service
     }
     public void printAuthor(String first, String last)
     {
+        audit.write("printAuthor");
         authorRepository.read(first, last);
     }
     public void printAuthors()
     {
+        audit.write("printAuthors");
         authorRepository.readAll();
     }
     public void deleteAuthor(String first, String last)
     {
+        audit.write("deleteAuthor");
         authorRepository.delete(first, last);
     }
     public void createEmployee()
     {
+        audit.write("createEmployee");
         Scanner s = new Scanner(System.in);
         System.out.println("Introduceti jobul angajatului:\n1 Agent de paza\n2 Bibliotecar\n3 Personal IT");
         int type = s.nextInt();
@@ -390,6 +404,7 @@ public class Service
     }
     public void printEmployee()
     {
+        audit.write("printEmployee");
         Scanner s = new Scanner(System.in);
         System.out.println("Introduceti id-ul angajatului");
         int id = s.nextInt();
@@ -411,10 +426,12 @@ public class Service
     }
     public void printEmployees()
     {
+        audit.write("printEmployees");
         employeeRepository.readAll();
     }
     public void deleteEmployee(int id)
     {
+        audit.write("deleteEmployee");
         for (int i = 0; i <  employeeRepository.getEmployees().length; i++)
         {
             if ( employeeRepository.getEmployees()[i] != null)
@@ -430,6 +447,7 @@ public class Service
     }
     public void borrowBook()
     {
+        audit.write("borrowBook");
         Scanner s = new Scanner(System.in);
         System.out.println("Introduceti id-ul clientului");
         int clientId = s.nextInt();
@@ -458,6 +476,7 @@ public class Service
     }
     public void returnBook()
     {
+        audit.write("returnBook");
         Scanner s = new Scanner(System.in);
         System.out.println("Introduceti id-ul clientului");
         int clientId = s.nextInt();
@@ -477,6 +496,7 @@ public class Service
     }
     public void showHistory()
     {
+        audit.write("showHistory");
         for (Borrowed b: borrowedBooks)
         {
             System.out.println(b);
